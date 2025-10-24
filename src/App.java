@@ -14,7 +14,7 @@ public class App extends PApplet {
     int startMs;
     boolean blueStarted = false;
     boolean Max = false;
-
+    
     public static void main(String[] args) {
         PApplet.main("App");
     }
@@ -37,14 +37,26 @@ public class App extends PApplet {
     }
 
     public void draw() {
-        background(200);
+       background(135, 206, 235);
+        
+
+        
+
+
 
         // --- road ---
         fill(150);
         rect(265, 0, 200, 600);
 
+        //clouds
+        // fill(255, 255, 255);
+        // ellipse(670, 500, 80, 50);
+        // ellipse(460, 700, 80, 50);
+        // ellipse(80, 250, 80, 50);
+        // ellipse(190, 200, 80, 50);
+        // ellipse(200, 400, 80, 50);
+
         fill(0);
-        // rect(355, 0, 20, 50);
         rect(355, 80, 20, 50);
         rect(355, 160, 20, 50);
         rect(355, 240, 20, 50);
@@ -108,10 +120,12 @@ public class App extends PApplet {
             blueStarted = true;
         }
         if (blueStarted == true) {
-            greenV -= 0.5;
+            greenV -= 0.15;
+
 
             if (wDown) {
                 redV -= 0.1;
+
             } else if (sDown) {
                 redV += 0.1;
                 greenV += 0.1;
@@ -122,8 +136,7 @@ public class App extends PApplet {
             redY += redV;
             greenY += greenV;
 
-            if (greenV < 0) {
-                greenV = 0;
+            
             }
             if (wDown) {
                 redV -= 0.1;
@@ -142,23 +155,9 @@ public class App extends PApplet {
                 redX += 5;
             }
 
-            int S = 50;
-
-            if (redY + S < 0 && Redresets < 3) {
-                redY = height;
-                Redresets++;
-            } else if (redY > height && Redresets < 3) {
-                redY = -S;
-                Redresets++;
-            }
-
-            if (greenY + S < 0 && Greenresets < 3) {
-                greenY = height;
-                Greenresets++;
-            } else if (greenY > height && Greenresets < 3) {
-                greenY = -S;
-                Greenresets++;
-            }
+            
+            reset();
+            
 
             if (Redresets >= 3 || Greenresets >= 3) {
                 noLoop();
@@ -229,7 +228,8 @@ public class App extends PApplet {
             fill(0, 0, 255);
             square(greenX, greenY, 50);
         }
-    }
+        
+    
 
     public void keyPressed() {
         if (key == 'w' || key == 'W') {
@@ -253,5 +253,24 @@ public class App extends PApplet {
         } else if (key == 'd' || key == 'D') {
             Ddown = false;
         }
+    }
+    //ChatGPT below 
+    public void reset(){
+        int S = 50;
+        if (redY + S < 0 && Redresets < 3) {
+                redY = height;
+                Redresets++;
+            } else if (redY > height && Redresets < 3) {
+                redY = -S;
+                Redresets++;
+            }
+
+            if (greenY + S < 0 && Greenresets < 3) {
+                greenY = height;
+                Greenresets++;
+            } else if (greenY > height && Greenresets < 3) {
+                greenY = -S;
+                Greenresets++;
+            }
     }
 }
