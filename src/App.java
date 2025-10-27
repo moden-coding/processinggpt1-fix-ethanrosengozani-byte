@@ -14,7 +14,7 @@ public class App extends PApplet {
     int startMs;
     boolean blueStarted = false;
     boolean Max = false;
-    
+
     public static void main(String[] args) {
         PApplet.main("App");
     }
@@ -37,26 +37,198 @@ public class App extends PApplet {
     }
 
     public void draw() {
-       background(135, 206, 235);
-        
-
-        
-
-
+        background(135, 206, 235);
 
         // --- road ---
         fill(150);
         rect(265, 0, 200, 600);
 
-        //clouds
-        // fill(255, 255, 255);
-        // ellipse(670, 500, 80, 50);
-        // ellipse(460, 700, 80, 50);
-        // ellipse(80, 250, 80, 50);
-        // ellipse(190, 200, 80, 50);
-        // ellipse(200, 400, 80, 50);
+      
+        roadLines();
+       
+        // checkers flag
+        checkersFlag();
 
-        fill(0);
+        int time = millis() - startMs;
+        if (time < 1000) {
+            textSize(20);
+            text("4 Seconds Left", 50, 100);
+        } else if (time < 2000) {
+            textSize(20);
+            text("3 Seconds Left", 50, 100);
+        } else if (time < 3000) {
+            textSize(20);
+            text("2 Seconds Left", 50, 100);
+        } else if (time < 4000) {
+            textSize(20);
+            text("1 Second Left", 50, 100);
+        } else if (time < 5000) {
+            fill(0);
+            textSize(20);
+            text("GO!", 100, 100);
+        }
+
+        if (millis() - startMs > 5000) {
+            blueStarted = true;
+        }
+        if (blueStarted == true) {
+            greenV -= 0.15;
+
+            if (greenV == 5) {
+                greenV = 5;
+            }
+
+            if (wDown) {
+
+                redV -= 0.1;
+                System.out.println(redV);
+
+            } else if (sDown) {
+                redV += 0.1;
+                greenV += 0.1;
+            } else {
+                redV *= 0.7;
+            }
+
+            redY += redV;
+            greenY += greenV;
+
+        }
+        if (wDown) {
+            redV -= 0.1;
+        } else if (sDown) {
+            redV += 0.1;
+            greenV += 0.1;
+        } else {
+            redV *= 0.7;
+        }
+        if (greenV > 5) {
+            greenV = 5;
+        }
+        if (Adown) {
+            redX -= 5;
+        } else if (Ddown) {
+            redX += 5;
+        }
+
+        reset();
+
+        if (Redresets >= 5 || Greenresets >= 5) {
+            noLoop();
+            fill(0);
+            textSize(40);
+            text("Game Over", 600, 50);
+            confetti();
+
+            if (Redresets > Greenresets) {
+                fill(0);
+                textSize(40);
+                text("Red Wins!", 600, 150);
+            } else if (Greenresets > Redresets) {
+                fill(0);
+                textSize(40);
+                text("Green Wins!", 600, 150);
+            } else {
+                fill(0);
+                textSize(40);
+                text("It's a Tie!", 600, 250);
+            }
+        }
+
+        fill(255, 80, 0);
+        square(redX, redY, 50);
+
+        fill(0, 0, 255);
+        square(greenX, greenY, 50);
+    }
+
+    public void keyPressed() {
+        if (key == 'w' || key == 'W') {
+            wDown = true;
+        } else if (key == 's' || key == 'S') {
+            sDown = true;
+        } else if (key == 'a' || key == 'A') {
+            Adown = true;
+        } else if (key == 'd' || key == 'D') {
+            Ddown = true;
+        }
+    }
+
+    public void keyReleased() {
+        if (key == 'w' || key == 'W') {
+            wDown = false;
+        } else if (key == 's' || key == 'S') {
+            sDown = false;
+        } else if (key == 'a' || key == 'A') {
+            Adown = false;
+        } else if (key == 'd' || key == 'D') {
+            Ddown = false;
+        }
+    }
+
+    public void confetti(){
+        fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+            square(random(600), random(400), 50);
+            fill(random(255), random(255), random(255));
+    }
+
+    public void roadLines(){
+         fill(0);
         rect(355, 80, 20, 50);
         rect(355, 160, 20, 50);
         rect(355, 240, 20, 50);
@@ -67,8 +239,10 @@ public class App extends PApplet {
         fill(255, 255, 0);
         rect(200, 0, 40, 800);
         rect(490, 0, 40, 800);
-        // checkers flag
-        fill(0);
+    }
+
+    public void checkersFlag(){
+         fill(0);
         square(265, 0, 30);
         fill(255);
         square(295, 0, 30);
@@ -96,181 +270,25 @@ public class App extends PApplet {
         square(445, 30, 30);
         fill(0);
         square(445, 0, 30);
-
-        int time = millis() - startMs;
-        if (time < 1000) {
-            textSize(20);
-            text("4 Seconds Left", 50, 100);
-        } else if (time < 2000) {
-            textSize(20);
-            text("3 Seconds Left", 50, 100);
-        } else if (time < 3000) {
-            textSize(20);
-            text("2 Seconds Left", 50, 100);
-        } else if (time < 4000) {
-            textSize(20);
-            text("1 Second Left", 50, 100);
-        } else if (time < 5000) {
-            fill(0);
-            textSize(20);
-            text("GO!", 100, 100);
-        }
-
-        if (millis() - startMs > 5000) {
-            blueStarted = true;
-        }
-        if (blueStarted == true) {
-            greenV -= 0.15;
-
-
-            if (wDown) {
-                redV -= 0.1;
-
-            } else if (sDown) {
-                redV += 0.1;
-                greenV += 0.1;
-            } else {
-                redV *= 0.7;
-            }
-
-            redY += redV;
-            greenY += greenV;
-
-            
-            }
-            if (wDown) {
-                redV -= 0.1;
-            } else if (sDown) {
-                redV += 0.1;
-                greenV += 0.1;
-            } else {
-                redV *= 0.7;
-            }
-            if (greenV > 5) {
-                greenV = 5;
-            }
-            if (Adown) {
-                redX -= 5;
-            } else if (Ddown) {
-                redX += 5;
-            }
-
-            
-            reset();
-            
-
-            if (Redresets >= 3 || Greenresets >= 3) {
-                noLoop();
-                fill(0);
-                textSize(40);
-                text("Game Over", 600, 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-                fill(random(255), random(255), random(255));
-                square(random(600), random(400), 50);
-
-                if (Redresets > Greenresets) {
-                    fill(0);
-                    textSize(40);
-                    text("Red Wins!", 600, 150);
-                } else if (Greenresets > Redresets) {
-                    fill(0);
-                    textSize(40);
-                    text("Green Wins!", 600, 150);
-                } else {
-                    fill(0);
-                    textSize(40);
-                    text("It's a Tie!", 600, 250);
-                }
-            }
-
-            fill(255, 80, 0);
-            square(redX, redY, 50);
-
-            fill(0, 0, 255);
-            square(greenX, greenY, 50);
-        }
-        
-    
-
-    public void keyPressed() {
-        if (key == 'w' || key == 'W') {
-            wDown = true;
-        } else if (key == 's' || key == 'S') {
-            sDown = true;
-        } else if (key == 'a' || key == 'A') {
-            Adown = true;
-        } else if (key == 'd' || key == 'D') {
-            Ddown = true;
-        }
     }
 
-    public void keyReleased() {
-        if (key == 'w' || key == 'W') {
-            wDown = false;
-        } else if (key == 's' || key == 'S') {
-            sDown = false;
-        } else if (key == 'a' || key == 'A') {
-            Adown = false;
-        } else if (key == 'd' || key == 'D') {
-            Ddown = false;
-        }
-    }
-    //ChatGPT below 
-    public void reset(){
+    // ChatGPT below
+    public void reset() {
         int S = 50;
-        if (redY + S < 0 && Redresets < 3) {
-                redY = height;
-                Redresets++;
-            } else if (redY > height && Redresets < 3) {
-                redY = -S;
-                Redresets++;
-            }
+        if (redY + S < 0 && Redresets < 5) {
+            redY = height;
+            Redresets++;
+        } else if (redY > height && Redresets < 5) {
+            redY = -S;
+            Redresets++;
+        }
 
-            if (greenY + S < 0 && Greenresets < 3) {
-                greenY = height;
-                Greenresets++;
-            } else if (greenY > height && Greenresets < 3) {
-                greenY = -S;
-                Greenresets++;
-            }
+        if (greenY + S < 0 && Greenresets < 5) {
+            greenY = height;
+            Greenresets++;
+        } else if (greenY > height && Greenresets < 5) {
+            greenY = -S;
+            Greenresets++;
+        }
     }
 }
