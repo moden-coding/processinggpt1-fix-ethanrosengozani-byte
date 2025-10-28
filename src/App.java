@@ -100,20 +100,20 @@ public class App extends PApplet {
 
           
             if (arrowleft) {
-                greenVX -= 0.5f;
+                greenVX -= 0.5;
             } else if (arrowRight) {
-                greenVX += 0.5f;
+                greenVX += 0.5;
             } else {
-                greenVX *= 0.7f;  
+                greenVX *= 0.7;  
             }
             greenX += greenVX;
 
             if (Adown) {
-                redVX -= 0.5f;
+                redVX -= 0.5;
             } else if (Ddown) {
-                redVX += 0.5f;
+                redVX += 0.5;
             } else {
-                redVX *= 0.7f;     
+                redVX *= 0.7;     
             }
             redX += redVX;
         }
