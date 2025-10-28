@@ -77,7 +77,7 @@ public class App extends PApplet {
             blueStarted = true;
         }
         if (blueStarted) {
-            // vertical controls
+            
             if (arrowUp) {
                 greenV -= 0.1;
             } else if (arrowDown) {
@@ -90,7 +90,7 @@ public class App extends PApplet {
                 redV -= 0.1;
                 System.out.println(redV);
             } else if (sDown) {
-                redV += 0.1;           // (fixed) only affects red
+                redV += 0.1;           
             } else {
                 redV *= 0.7;
             }
@@ -98,13 +98,13 @@ public class App extends PApplet {
             redY += redV;
             greenY += greenV;
 
-            // horizontal controls now use velocities (required for X-bounce)
+          
             if (arrowleft) {
                 greenVX -= 0.5f;
             } else if (arrowRight) {
                 greenVX += 0.5f;
             } else {
-                greenVX *= 0.7f;   // friction
+                greenVX *= 0.7f;  
             }
             greenX += greenVX;
 
@@ -113,14 +113,12 @@ public class App extends PApplet {
             } else if (Ddown) {
                 redVX += 0.5f;
             } else {
-                redVX *= 0.7f;     // friction
+                redVX *= 0.7f;     
             }
             redX += redVX;
         }
 
-        // (fixed) removed duplicate vertical physics blocks here
-
-        // collisions before wrap
+        
         collideSquares2D(0.9f);
 
         reset();
